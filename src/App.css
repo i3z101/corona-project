@@ -24,6 +24,13 @@
   color: white;
 }
 
+.container{
+  flex: content;
+  justify-content: center;
+  align-items: center;
+  margin: 20% 30%;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -36,3 +43,4 @@
     transform: rotate(360deg);
   }
 }
+

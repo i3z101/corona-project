@@ -1,0 +1,36 @@
+.container{
+    display: flexbox;
+    align-items: center;
+}
+.title{
+    text-align: center;
+    font-weight: 500;
+    font-size: large;
+}
+.storeClass{
+    margin-top: 3%;
+    width: 60%;
+
+    
+}
+.storesStyle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10%; */
+}
+
+
+.storesStyleList{
+    display: contents;
+
+}
+
+.MuiTableHead-root{
+    display: flex;
+    justify-content: space-evenly;
+   
+}
+.btn-style{
+    display: inline;
+}
