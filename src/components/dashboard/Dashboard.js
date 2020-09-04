@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import './dashboard.css'
-import { TableContainer, Table, TableBody, TableCell, withStyles, TableRow, Button, Menu, MenuItem } from '@material-ui/core';
+import { TableContainer, Table, TableBody, TableCell, withStyles, TableRow, Button, Menu, MenuItem, Popover } from '@material-ui/core';
 import clsx from 'clsx'
 import { BsFillCircleFill, BsArrowDownShort } from "react-icons/bs";
 const styles= {
@@ -24,6 +24,10 @@ const styles= {
     btnRoot:{
         marginLeft:'200%',
         width:'100%'
+    },
+    menuContainerPosition:{
+        position:'absolute',
+        left:'57%'
     }
 }
 
@@ -47,13 +51,16 @@ const Dashboard= (props) => {
     ])
 
     const [dropDown, setDropDown]=useState(false)
+    const [anchorEl, setAnchorEl]= useState(null)
     
-    const handleOpenDropDown= ()=>{
+    const handleOpenDropDown= (e)=>{
         setDropDown(true)
+        setAnchorEl(e.currentTarget)
     }
 
     const handleCloseDropDown= ()=>{
         setDropDown(false)
+        setAnchorEl(null)
     }
     
     return( <div className='container'>
@@ -67,12 +74,15 @@ const Dashboard= (props) => {
         <div className='storesStyle'>
         <CardHeader title="Stores details" className='title'/>
         <div className='btn-style'>
-        <Button className={clsx(classes.btnRoot)} onClick={()=>handleOpenDropDown()}>SORT BY <BsArrowDownShort size={22}/></Button>
+        <Button className={clsx(classes.btnRoot)} onClick={handleOpenDropDown}>SORT BY <BsArrowDownShort size={22}/></Button>
+    
         <Menu
+        anchorEl={anchorEl}
+       
         keepMounted
-        
         open={dropDown}
         onClose={()=>handleCloseDropDown()}
+        className={clsx(classes.menuContainerPosition)}
         >
 
         <MenuItem onClick={()=>handleCloseDropDown()}>sport</MenuItem>
@@ -85,6 +95,8 @@ const Dashboard= (props) => {
         
         </div>
         
+
+        
        <TableContainer>
         <Table>
         <TableBody>
@@ -93,8 +105,8 @@ const Dashboard= (props) => {
                 <TableCell className={clsx(classes.label)}>COMMITTED STATUS</TableCell>
                 <TableCell className={clsx(classes.label)}>SORT</TableCell>
             </TableRow>
-            {storesDetails.map(store=>{
-                return <TableRow >
+            {storesDetails.map((store,index)=>{
+                return <TableRow key={index}>
                     <TableCell className={clsx(classes.labelDetails)}>{store.storeName.toUpperCase()}</TableCell>
                     <TableCell className={clsx(classes.labelDetails)}><BsFillCircleFill size={15} color={store.status===1?colors.committed:store.status===2?colors.moderate:store.status===3?colors.notCommitted:'black'}/></TableCell>
                     <TableCell className={clsx(classes.labelDetails)}>{store.sort}</TableCell>

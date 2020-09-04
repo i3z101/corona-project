@@ -34,3 +34,7 @@
 .btn-style{
     display: inline;
 }
+.menuContainer{
+    position:'absolute';
+    left:'57%'
+}
